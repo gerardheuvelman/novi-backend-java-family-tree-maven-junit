@@ -1,5 +1,10 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+
+        Person me = new Person("Gerard", "Harmen", "Heuvelman", "male",48);
+        Pet teil = new Pet("Teil", 10, "Labrador");
+
+        me.addPet(teil);
+        System.out.println("Program complete...");
     }
 }
