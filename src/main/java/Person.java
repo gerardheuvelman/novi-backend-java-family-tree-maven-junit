@@ -29,6 +29,7 @@ public class Person {
         this.sex = sex;
         this.age = age;
     }
+
     // METHODS //
 
     public void addParents(Person father, Person mother) {
@@ -51,6 +52,17 @@ public class Person {
 
     public void addChild(Person child) {
         if (!this.children.contains(child)) {
+            // first, try to add this person as a parent to the referenced child object.
+            String sex = this.sex;
+            if (sex == "male") {
+                child.setFather(this);
+            } else if (sex == "female") {
+                child.setMother(this);
+            } else {
+                System.out.println("Error: this person's sex field has been set incorrectly.");
+                return;
+            }
+            // If this succeeded, add the child to the list of children.
             this.children.add(child);
             System.out.println("Child added.");
         } else {
@@ -60,6 +72,7 @@ public class Person {
 
     public  void addPet(Pet pet) {
         if (!this.pets.contains(pet)) {
+            pet.AddOwner(this);
             this.pets.add(pet);
             System.out.println("Pet added.");
         } else {
@@ -68,11 +81,20 @@ public class Person {
     }
 
     public void addSibling(Person sibling) {
-        if (this.siblings.contains(sibling)) {
+        if (!this.siblings.contains(sibling)) {
+            // mutually add each other as sibling, with (as a transaction)
             this.siblings.add(sibling);
-            System.out.println("Sibling added.");
+            if (this.siblings.contains(sibling)) {
+                sibling.siblings.add(this); // first half of the transaction.
+                if (sibling.siblings.contains(this)) {
+        // Success state:
+                    sibling.siblings.add(this); // second half of the transaction.
+                    System.out.println("Sibling added.");
+        // Fail states below this line:
+                } else System.err.println("Adding this person to reference siblings sibling list failed.");
+            } else System.err.println("Adding the reference sibling to this persons sibling list failed. ");
         } else {
-            System.out.println("Sibling already added to this person's list of siblings.");
+            System.err.println("Sibling already added to this person's list of siblings.");
         }
     }
 

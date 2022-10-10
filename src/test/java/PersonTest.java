@@ -2,10 +2,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PersonTest {
+ public class PersonTest {
 
     @org.junit.jupiter.api.Test
-    void addParentsAddsBothParents() {
+    public void addParentsAddsBothParents() {
         // ARRANGE
         Person me = new Person("Gerard", "Harmen", "Heuvelman", "male",48);
         Person harm = new Person("Harmen","Cornelis","Heuvelman","male",71);
@@ -22,7 +22,7 @@ class PersonTest {
     }
 
     @org.junit.jupiter.api.Test
-    void addChildCorrectlyAddsAChild() {
+    public void addChildCorrectlyAddsAChild() {
         // ARRANGE
         Person me = new Person("Gerard", "Harmen", "Heuvelman", "male",48);
         Person sophie = new Person( "Sophie", "Heuvelman","female", 14);
@@ -36,7 +36,7 @@ class PersonTest {
     }
 
     @org.junit.jupiter.api.Test
-    void addPetAddsAPet() {
+    public void addPetAddsAPet() {
         // ARRANGE
         Person me = new Person("Gerard", "Harmen", "Heuvelman", "male",48);
         Pet teil = new Pet("Teil", 10, "Labrador");
@@ -50,8 +50,8 @@ class PersonTest {
     }
 
     @org.junit.jupiter.api.Test
-    void addSiblingAddsASibling() {
-        // ARRNAGE
+    public void addSiblingAddsASibling() {
+        // ARRANGE
         Person me = new Person("Gerard", "Harmen", "Heuvelman", "male",48);
         Person hendrik = new Person("Hendrik","Harmen","Heuvelman","male", 50);
 
@@ -61,24 +61,19 @@ class PersonTest {
         // ASSERT
         assertTrue(me.getSiblings().contains(hendrik));
         assertTrue(hendrik.getSiblings().contains(me));
-
     }
 
     @org.junit.jupiter.api.Test
-    void getGrandchildren() {
-
+    public void getGrandchildren() {
         // ARRANGE
         Person greet = new Person("Greetje","Kool","female", 72);
         Person me = new Person("Gerard", "Harmen", "Heuvelman", "male",48);
         Person sophie = new Person("Sophie", "Heuvelman", "female", 14);
         greet.addChild(me);
         me.addChild(sophie);
-
         // ACT
         List<Person> grandchildren = greet.getGrandchildren();
-
         // ASSERT
         assertTrue(grandchildren.contains(sophie));
-
     }
-}
+ }
